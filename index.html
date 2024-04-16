@@ -101,17 +101,24 @@
 
 <script>
     function generateLink() {
-        var numberInput = document.getElementById("numberInput").value;
+        let numberInput = document.getElementById("numberInput").value;
         var baseUrl = "https://wa.me/";
-        var fullUrl = baseUrl + numberInput;
-        
+
         // Check if the input is a valid number
         if (!isNaN(numberInput)) {
-            // Use the numberInput variable as needed
             console.log("The user entered a valid number");
+            let fullUrl = baseUrl + numberInput;
+
+            // Check if the input starts with '0'
+            if (numberInput.startsWith('0')) {
+                console.log("The user entered a number starting with '0'");
+                numberInput = numberInput.substring(1); // Remove the first character (zero)
+                fullUrl = baseUrl + '971' + numberInput; // Update the full URL
+            }
+
             window.location.href = fullUrl; // Redirect to WhatsApp page
         } else {
-            console.log("User Did not enter Valid Number.");
+            console.log("User Did not enter a valid number.");
             alert('Please Enter A Valid Number');
             document.getElementById("numberInput").value = ""; // Reset the display
         }
