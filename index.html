@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whatsapp-Redirector</title>
+
+    <style>
+        #display {
+            width: 900px;
+            height: 80px;
+            font-size: 30px;
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Poppins, sans-serif';
+            background-color: rgb(255, 255, 255);
+            text-align: left; /* Left align the text */
+            transition: transform 0.3s, box-shadow 0.3s; /* Add transition for smooth effect (TRANSFORM and SHADOW) */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        #display:hover {
+            transform: scale(1.05); /* Scale the input field to 105% on hover */
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.8); /* Make shadow more opaque on hover */
+        }
+
+        body {
+            background-image: url('https://wallpapers.com/images/featured-full/lake-urj0tbeu3px5zdlc.jpg'); /* Background Image*/
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        #generateButton {
+            background-color: #ffffff;
+            border: none;
+            color: rgb(0, 0, 0);
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: transform 0.3s, box-shadow 0.3s; /* Add transition for smooth effect (TRANSFORM and SHADOW) */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        #generateButton:hover {
+            transform: scale(1.1); /* Scale the button to 110% on hover */
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.8); /* Make shadow more opaque on hover */
+        }
+
+        #resetButton {
+            background-color: #ffffff; 
+            border: none;
+            color: rgb(0, 0, 0);
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            bottom: 20%;
+            left: 80%;
+            transition: transform 0.3s, box-shadow 0.3s; /* Add transition for smooth effect (TRANSFORM and SHADOW) */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        #resetButton:hover {
+            transform: scale(1.1); /* Scale the button to 110% on hover */
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.8); /* Make shadow more opaque on hover */
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="whatsapp-redirectory">
+        <form>
+            <div class="display">
+                <input type="text" name="numberInput" id="numberInput" placeholder="Enter a valid phone number">
+            </div>
+            <div>
+                <input type="button" id="generateButton" value="Generate Link" onclick="generateLink()">
+                <input type="reset" id="resetButton" value="Reset">
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function generateLink() {
+        var numberInput = document.getElementById("numberInput").value;
+        var baseUrl = "https://wa.me/";
+        var fullUrl = baseUrl + numberInput;
+        
+        // Check if the input is a valid number
+        if (!isNaN(numberInput)) {
+            // Use the numberInput variable as needed
+            console.log("The user entered a valid number");
+            window.location.href = fullUrl; // Redirect to WhatsApp page
+        } else {
+            console.log("User Did not enter Valid Number.");
+            alert('Please Enter A Valid Number');
+            document.getElementById("numberInput").value = ""; // Reset the display
+        }
+    }
+</script>
+
+</body>
+</html>
