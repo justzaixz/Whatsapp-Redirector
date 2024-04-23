@@ -6,6 +6,21 @@
 <title>Whatsapp-Redirector</title>
 
 <style>
+.close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 28px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    float: right;
+    font-weight: light;
+    color: black;
+
+    
+}
+
 
     /* Styles for form container */
     .container {
@@ -53,36 +68,13 @@
         transform: scale(1.1);
         box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.8);
     }
-
-    /* Styles for the popup window */
-    .popup {
-        display: none;
-        position: fixed;
-        z-index: 999;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
+    p{
+        color:black;
+        font: size 16px;
+        top: 80%;
     }
 
-    .popup-content {
-        background-color: #fefefe;
-        margin: 20% auto;
-        padding: 20px;
-        border-radius: 10px;
-        width: 80%;
-        max-width: 400px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
 
-    .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-    }
 
     .close:hover, .close:focus {
         color: black;
@@ -99,11 +91,64 @@
       height: 100vh;
       margin: 0;
     }
+
+      /* Styles for feedback button container */
+      #feedbackContainer {
+        display: none; /* Initially hide the container */
+        position: fixed;
+        bottom: 20px;
+        right: 10px;
+        background-color: rgba(255, 255, 255, 0.8); /* Adjust opacity as needed */
+        padding: 10px; /* Add padding to make the container visible */
+        border-radius: 5px; /* Add border-radius for better appearance */
+        z-index: 999; /* Ensure it appears above other elements */
+        height: 200px;
+        width: 200px;
+        animation: fadeInUp 0.5s ease forwards; /* Apply fade in animation */
+    }
+
+    /* Keyframes for fade in animation */
+    @keyframes fadeInUp {
+        0% {
+            transform: translateY(100%); /* Start from bottom */
+            opacity: 0; /* Initially transparent */
+        }
+        100% {
+            transform: translateY(0); /* Move to original position */
+            opacity: 1; /* Fully visible */
+        }
+    }
+
+    /* Styles for feedback button */
+    #feedbackButton {
+    position: absolute; /* Position the button absolutely within its container */
+    bottom: 10px; /* Position the button 10px from the bottom of the container */
+    left: 50%; /* Position the button horizontally in the middle of the container */
+    transform: translateX(-50%); /* Center the button horizontally */
+    background-color: #ffffff; /* White background */
+    color: #000000; /* Black text color */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 2px solid transparent; /* Add a transparent border */
+}
+
+#feedbackButton:hover {
+    transform: translate(-50%, -3%) scale(1.1); /* Scale and shift slightly on hover */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.8);
+    border-color: transparent; /* Ensure the border remains transparent on hover */
+}
+
+
+
 </style>
 
 </head>
 <body>
-
 
 <div class="container">
     <div class="whatsapp-redirectory">
@@ -136,14 +181,14 @@
 </div>
 
 <!-- Popup window -->
-<div class="popup" id="popup">
-    <div class="popup-content">
-        <span class="close" onclick="closePopup()">&times;</span>
-        <p>Got Any Feedback?:</p>
-        <!-- Got any feedback button inside the popup window -->
-        <input type="button" id="feedbackButton" value="Yes I do!" onclick="feedbackButton()">
-    </div>
+
+<!-- Feedback button container -->
+<div id="feedbackContainer">
+    <button id="feedbackButton" onclick="feedbackButton()">Feedback</button>
+    <button class="close" onclick="closeFeedbackContainer()">&times;</button>
+    <p>Got Any Feedback?</p>
 </div>
+
 
 <script>
     function generateLink() {
@@ -179,31 +224,36 @@
         }
     }
 
+
+    // Function to show the feedback button container with fade in animation
+    function showFeedbackButton() {
+        console.log("showFeedbackButton function called");
+        // Add a delay before showing the container
+        setTimeout(function() {
+            console.log("Timeout executed");
+            document.getElementById("feedbackContainer").style.display = "block";
+        }, 8000); // 5000 milliseconds = 5 seconds
+    }
+
+    // Call the function when the page is loaded
+    window.addEventListener('load', function() {
+        console.log("Window loaded");
+        showFeedbackButton();
+    });
+
+    // Function to handle feedback button click
     function feedbackButton() {
-        console.log('feedback button has been clicked')
+        console.log('Feedback button has been clicked');
         window.location.href = "https://forms.gle/9bjZ4pyhA1xJMr5C9";
     }
+    
+    function closeFeedbackContainer() {
+    document.getElementById("feedbackContainer").style.display = "none";
+}
 
-    function closePopup() {
-        var popup = document.getElementById("popup");
-        popup.style.display = "none";
-    }
 </script>
 
-<script>
-    // Function to open the popup window
-    function openPopup() {
-        var popup = document.getElementById("popup");
-        popup.style.display = "block";
-    }
-</script>
 
-<!-- Script to open popup window when the page loads -->
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        openPopup();
-    });
-</script>
 
 </body>
 </html>
