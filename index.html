@@ -135,6 +135,8 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
     transition: transform 0.3s, box-shadow 0.3s;
     border: 2px solid transparent; /* Add a transparent border */
+    opacity: 1; /* Set initial opacity */
+    transition: opacity 0.5s ease; /* Define transition */
 }
 
 #feedbackButton:hover {
@@ -155,17 +157,19 @@
         <form>
             <select id="countryCodes"> <!-- This gives it an ID for later, when I wrote that the variable will check this ID's value. -->
                 <option value="Please Select a Country">Please Select a Country</option>
-                <option value="+1">United States (+1)</option>
-                <option value="+86">China (+86)</option>
-                <option value="+91">India (+91)</option>
-                <option value="+44">United Kingdom (+44)</option>
-                <option value="+81">Japan (+81)</option>
-                <option value="+7">Russia (+7)</option>
-                <option value="+49">Germany (+49)</option>
-                <option value="+62">Indonesia (+62)</option>
-                <option value="+55">Brazil (+55)</option>
                 <option value="+971">UAE (+971)</option>
-                <option value="+965">Kuwait (+965) </option>
+                <option value="+55">Brazil (+55)</option>
+                <option value="+86">China (+86)</option>
+                <option value="+20">China (+20)</option>
+                <option value="+49">Germany (+49)</option>
+                <option value="+91">India (+91)</option>
+                <option value="+62">Indonesia (+62)</option>
+                <option value="+81">Japan (+81)</option>
+                <option value="+965">Kuwait (+965)</option>
+                <option value="+7">Russia (+7)</option>
+                <option value="+44">United Kingdom (+44)</option>
+                <option value="+1">United States (+1)</option>
+                
                 <!-- This makes a dropdown menu with these country codes -->
             </select>
 
