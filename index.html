@@ -228,6 +228,19 @@ function generateLink() {
             return; // Exit the function if no country code is selected and the number doesn't start with any country code
         }
     }
+    else {
+        let startsWithCountryCode = false;
+        let countryCodes = ['971', '55', '86', '20', '49', '91', '62', '81', '965', '7', '44', '1'];
+        for (let i = 0; i < countryCodes.length; i++) {
+            if (numberInput.startsWith(countryCodes[i])) {
+                countryCode = "+" + countryCodes[i]; // Set the countryCode to the matching one
+                startsWithCountryCode = true;
+                numberInput = numberInput.substring(countryCodes[i].length); // Remove the country code prefix from the number
+                break; // Exit the loop once a matching country code is found
+            }
+    }
+}
+
 
     // Check if the input is a valid number
     if (!isNaN(numberInput)) {
@@ -240,9 +253,9 @@ function generateLink() {
         alert('Please Enter A Valid Number');
         document.getElementById("numberInput").value = ""; // Reset the display
     }
+
 }
-
-
+   
 
 
     // Function to show the feedback button container with fade in animation
