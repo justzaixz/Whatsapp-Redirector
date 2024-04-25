@@ -195,38 +195,54 @@
 
 
 <script>
-    function generateLink() {
-        let numberInput = document.getElementById("numberInput").value;
-        var baseUrl = "https://wa.me/";
+function generateLink() {
+    let numberInput = document.getElementById("numberInput").value;
+    var baseUrl = "https://wa.me/";
 
-        // Get the selected country code from the dropdown
-        let countryCode = document.getElementById("countryCodes").value;
+    // Remove spaces from the numberInput
+    numberInput = numberInput.replace(/\s/g, '');
 
-        if (countryCode === "Please Select a Country") {
-            console.log('User Did not select anything (COUNTRY)');
-            alert('Please select a country code.');
-            return; // Exit the function early if countryCode is not selected
-        }
+    // Remove leading '+' if it exists
+    if (numberInput.startsWith('+')) {
+        numberInput = numberInput.substring(1);
+    }
 
-        // Check if the input is a valid number
-        if (!isNaN(numberInput)) {
-            console.log("The user entered a valid number");
-            let fullUrl = baseUrl + countryCode + numberInput;
+    // Get the selected country code from the dropdown
+    let countryCode = document.getElementById("countryCodes").value;
 
-            // Check if the input starts with '0'
-            if (numberInput.startsWith('0')) {
-                console.log("The user entered a number starting with '0'");
-                numberInput = numberInput.substring(1); // Remove the first character (zero)
-                fullUrl = baseUrl + countryCode + numberInput; // Update the full URL
+    if (countryCode === "Please Select a Country") {
+        console.log('User Did not select anything (COUNTRYCODE)');
+        // If no country code is selected, check if the number starts with any country code
+        let startsWithCountryCode = false;
+        let countryCodes = ['971', '55', '86', '20', '49', '91', '62', '81', '965', '7', '44', '1'];
+        for (let i = 0; i < countryCodes.length; i++) {
+            if (numberInput.startsWith(countryCodes[i])) {
+                countryCode = "+" + countryCodes[i]; // Set the countryCode to the matching one
+                startsWithCountryCode = true;
+                numberInput = numberInput.substring(countryCodes[i].length); // Remove the country code prefix from the number
+                break; // Exit the loop once a matching country code is found
             }
-
-            window.location.href = fullUrl; // Redirect to WhatsApp page
-        } else {
-            console.log("User Did not enter a valid number.");
-            alert('Please Enter A Valid Number');
-            document.getElementById("numberInput").value = ""; // Reset the display
+        }
+        if (!startsWithCountryCode) {
+            alert('Please select a country code or enter a valid phone number starting with a country code.');
+            return; // Exit the function if no country code is selected and the number doesn't start with any country code
         }
     }
+
+    // Check if the input is a valid number
+    if (!isNaN(numberInput)) {
+        console.log("The user entered a valid number");
+
+        let fullUrl = baseUrl + countryCode + numberInput;
+        window.location.href = fullUrl; // Redirect to WhatsApp page
+    } else {
+        console.log("User Did not enter a valid number.");
+        alert('Please Enter A Valid Number');
+        document.getElementById("numberInput").value = ""; // Reset the display
+    }
+}
+
+
 
 
     // Function to show the feedback button container with fade in animation
@@ -234,7 +250,7 @@
         console.log("showFeedbackButton function called");
         // Add a delay before showing the container
         setTimeout(function() {
-            console.log("Timeout executed");
+            console.log("displaying the feedback button");
             document.getElementById("feedbackContainer").style.display = "block";
         }, 8000); // 5000 milliseconds = 5 seconds
     }
